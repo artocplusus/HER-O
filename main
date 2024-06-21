@@ -1,0 +1,117 @@
+#include <iostream>
+#include <ctime>
+#include "Header.h"
+#include <conio.h>
+#include "audiere.h"
+#include "windows.h"
+#include <stdlib.h>
+#pragma warning(disable : 4996)
+
+using namespace audiere;
+using namespace std;
+
+int main()
+{
+	srand(time(0));
+	AudioDevicePtr device = OpenDevice();
+	OutputStreamPtr sound = OpenSound(device, "My_New_Song_1_1.wav", false);
+	OutputStreamPtr sound1 = OpenSound(device, "6717309660561408.wav", false);
+	int exit = 1;
+	int nmHp;
+	int nmDamage;
+	int sleepTime;
+	int plrDamage;
+	int plrHp;
+	int critChance;
+	int critDamage;
+	int currentNmHp;
+	int currentPlrHp;
+	int randSleep;
+	int kills;
+	float volume;
+	char attackButton;
+	char dodgeButton;
+	int* tops = new int[5] {0, 0, 0, 0, 0};
+	while (exit == 1)
+	{
+		kills = 0;
+		nmHp = 10;
+		nmDamage = 3;
+		sleepTime = 1025;
+		plrDamage = 5;
+		plrHp = 20;
+		currentPlrHp = 20;
+		critChance = 0;
+		critDamage = 50;
+		mainMenu(&volume, &attackButton, &dodgeButton);
+		sound->setVolume(volume);
+		sound1->setRepeat(true);
+		sound1->play();
+		Sleep(3200);
+		sound1->stop();
+		system("cls");
+		sound1->stop();
+		newEnemy(&nmHp, &nmDamage, &sleepTime, &currentNmHp);
+		sound->setRepeat(true);
+		sound->play();
+		cout << "________________________________________________________________________________________________________________________";
+		cout << "________________________________________________________________________________________________________________________";
+		cout << "                                                          " << currentNmHp << "/" << nmHp << "HP" << endl;
+		cout << "                                                          H H H H" << endl;
+		cout << "                                                          H H H H" << endl;
+		cout << "                                                          H H H H" << endl;
+		cout << "                                                          H H H H" << endl;
+		cout << "                                                           |\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
+		cout << "                                                               |" << endl;
+		cout << "                                                          O O O O" << endl;
+		cout << "                                                          O O O O" << endl;
+		cout << "                                                          O O O O" << endl;
+		cout << "                                                          O O O O" << endl;
+		cout << "                                                          " << currentPlrHp << "/" << plrHp << "HP" << endl;
+		cout << "________________________________________________________________________________________________________________________";
+		cout << "________________________________________________________________________________________________________________________";
+		while (currentPlrHp > 0)
+		{
+			randSleep = rand() % 1001 + 500;
+			Sleep(randSleep);
+			system("cls");
+			enemyAttack(nmDamage, &currentPlrHp, sleepTime, dodgeButton, currentNmHp, nmHp, plrHp);
+			playerAttack(plrDamage, critChance, critDamage, &currentNmHp, attackButton, nmHp, plrHp, currentPlrHp);
+			if (!(currentNmHp > 0))
+			{
+				kills++;
+				sound->stop();
+				sound1->setRepeat(true);
+				sound1->play();
+				system("cls");
+				reward(&plrHp, &plrDamage, &critChance, &critDamage, &currentPlrHp);
+				sound1->stop();
+				cout << "________________________________________________________________________________________________________________________";
+				cout << "________________________________________________________________________________________________________________________";
+				cout << "                                                          " << currentNmHp << "/" << nmHp << "HP" << endl;
+				cout << "                                                          H H H H" << endl;
+				cout << "                                                          H H H H" << endl;
+				cout << "                                                          H H H H" << endl;
+				cout << "                                                          H H H H" << endl;
+				cout << "                                                           |\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
+				cout << "                                                               |" << endl;
+				cout << "                                                          O O O O" << endl;
+				cout << "                                                          O O O O" << endl;
+				cout << "                                                          O O O O" << endl;
+				cout << "                                                          O O O O" << endl;
+				cout << "                                                          " << currentPlrHp << "/" << plrHp << "HP" << endl;
+				cout << "________________________________________________________________________________________________________________________";
+				cout << "________________________________________________________________________________________________________________________";
+				newEnemy(&nmHp, &nmDamage, &sleepTime, &currentNmHp);
+				sound->setRepeat(true);
+				sound->play();
+			}
+		}
+		system("cls");
+		sound->stop();
+		sound1->setRepeat(true);
+		sound1->play();
+		GameOver(kills, tops, &exit);
+	}
+	return 0;
+}
