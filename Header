@@ -1,0 +1,17 @@
+#pragma once
+#include <iostream>
+#include <ctime>
+
+void enemyAttack(const int nmDamage, int* currentPlrHp, const int sleepTime, const char dodgeButton,
+	const int currentNmHp, const int nmHp, const int plrHp);
+
+void playerAttack(const int plrDamage,const int critChance, const int critDamage, int* currentNmHp, 
+	const char attackButton, const int nmHp, const int plrHp, const int currentPlrHp);
+
+void reward(int* plrHp, int* plrDamage, int* critChance, int* critDamage, int* CurrentPlrHp);
+
+void newEnemy(int* nmHp, int* nmDamage, int* sleepTime, int* currentNmHp);
+
+void GameOver(const int kills, int* tops, int* exit);
+
+void mainMenu(float* volume, char* attackButton, char* dodgeButton);
