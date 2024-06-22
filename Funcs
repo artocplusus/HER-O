@@ -107,7 +107,7 @@ void playerAttack(const int plrDamage, const int critChance, const int critDamag
 	{
 		luck = true;
 	}
-	char press = ' ';
+	char press = '~';
 	while (press != attackButton)
 	{
 		press = getch();
@@ -305,7 +305,9 @@ void mainMenu(float* volume, char* attackButton, char* dodgeButton)
 		{
 			system("cls");
 			cout << "\n\n\n\n\n\nMUTE MUSIC?\n0 - YES\n1 - NO\n\n";
-			*volume = getch();
+			char press = getch();
+			if (press == '0')
+				*volume = 0.0f;
 			cout << "SET ATTACK BUTTON\n\n";
 			*attackButton = getch();
 			cout << "SET DODGE BUTTON\n\n";
