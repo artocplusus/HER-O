@@ -16,7 +16,7 @@ int main()
 	AudioDevicePtr device = OpenDevice();
 	OutputStreamPtr sound = OpenSound(device, "My_New_Song_1_1.wav", false);
 	OutputStreamPtr sound1 = OpenSound(device, "6717309660561408.wav", false);
-	int exit = 1;
+	char exit = '1';
 	int nmHp;
 	int nmDamage;
 	int sleepTime;
@@ -29,10 +29,10 @@ int main()
 	int randSleep;
 	int kills;
 	float volume;
-	char attackButton;
-	char dodgeButton;
+	char attackButton = 'z';
+	char dodgeButton = 'x';
 	int* tops = new int[5] {0, 0, 0, 0, 0};
-	while (exit == 1)
+	while (exit ==  '1')
 	{
 		kills = 0;
 		nmHp = 10;
@@ -43,14 +43,17 @@ int main()
 		currentPlrHp = 20;
 		critChance = 0;
 		critDamage = 50;
+		sound1->stop();
+		sound1 = OpenSound(device, "6717309660561408.wav", false);
 		mainMenu(&volume, &attackButton, &dodgeButton);
 		sound->setVolume(volume);
+		sound1->setVolume(volume);
 		sound1->setRepeat(true);
 		sound1->play();
 		Sleep(3200);
-		sound1->stop();
 		system("cls");
 		sound1->stop();
+		sound1 = OpenSound(device, "6717309660561408.wav", false);
 		newEnemy(&nmHp, &nmDamage, &sleepTime, &currentNmHp);
 		sound->setRepeat(true);
 		sound->play();
@@ -70,45 +73,53 @@ int main()
 		cout << "                                                          " << currentPlrHp << "/" << plrHp << "HP" << endl;
 		cout << "________________________________________________________________________________________________________________________";
 		cout << "________________________________________________________________________________________________________________________";
-		while (currentPlrHp > 0)
+		while (true)
 		{
 			randSleep = rand() % 1001 + 500;
 			Sleep(randSleep);
 			system("cls");
 			enemyAttack(nmDamage, &currentPlrHp, sleepTime, dodgeButton, currentNmHp, nmHp, plrHp);
-			playerAttack(plrDamage, critChance, critDamage, &currentNmHp, attackButton, nmHp, plrHp, currentPlrHp);
-			if (!(currentNmHp > 0))
+			if(currentPlrHp > 0)
 			{
-				kills++;
-				sound->stop();
-				sound1->setRepeat(true);
-				sound1->play();
-				system("cls");
-				reward(&plrHp, &plrDamage, &critChance, &critDamage, &currentPlrHp);
-				sound1->stop();
-				cout << "________________________________________________________________________________________________________________________";
-				cout << "________________________________________________________________________________________________________________________";
-				cout << "                                                          " << currentNmHp << "/" << nmHp << "HP" << endl;
-				cout << "                                                          H H H H" << endl;
-				cout << "                                                          H H H H" << endl;
-				cout << "                                                          H H H H" << endl;
-				cout << "                                                          H H H H" << endl;
-				cout << "                                                           |\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
-				cout << "                                                               |" << endl;
-				cout << "                                                          O O O O" << endl;
-				cout << "                                                          O O O O" << endl;
-				cout << "                                                          O O O O" << endl;
-				cout << "                                                          O O O O" << endl;
-				cout << "                                                          " << currentPlrHp << "/" << plrHp << "HP" << endl;
-				cout << "________________________________________________________________________________________________________________________";
-				cout << "________________________________________________________________________________________________________________________";
-				newEnemy(&nmHp, &nmDamage, &sleepTime, &currentNmHp);
-				sound->setRepeat(true);
-				sound->play();
+				playerAttack(plrDamage, critChance, critDamage, &currentNmHp, attackButton, nmHp, plrHp, currentPlrHp);
+				if (!(currentNmHp > 0))
+				{
+					kills++;
+					sound->stop();
+					sound = OpenSound(device, "My_New_Song_1_1.wav", false);
+					sound1->setRepeat(true);
+					sound1->play();
+					system("cls");
+					reward(&plrHp, &plrDamage, &critChance, &critDamage, &currentPlrHp);
+					sound1->stop();
+					sound1 = OpenSound(device, "6717309660561408.wav", false);
+					newEnemy(&nmHp, &nmDamage, &sleepTime, &currentNmHp);
+					cout << "________________________________________________________________________________________________________________________";
+					cout << "________________________________________________________________________________________________________________________";
+					cout << "                                                          " << currentNmHp << "/" << nmHp << "HP" << endl;
+					cout << "                                                          H H H H" << endl;
+					cout << "                                                          H H H H" << endl;
+					cout << "                                                          H H H H" << endl;
+					cout << "                                                          H H H H" << endl;
+					cout << "                                                           |\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
+					cout << "                                                               |" << endl;
+					cout << "                                                          O O O O" << endl;
+					cout << "                                                          O O O O" << endl;
+					cout << "                                                          O O O O" << endl;
+					cout << "                                                          O O O O" << endl;
+					cout << "                                                          " << currentPlrHp << "/" << plrHp << "HP" << endl;
+					cout << "________________________________________________________________________________________________________________________";
+					cout << "________________________________________________________________________________________________________________________";
+					sound->setRepeat(true);
+					sound->play();
+				}
 			}
+			else
+				break;
 		}
 		system("cls");
 		sound->stop();
+		sound = OpenSound(device, "My_New_Song_1_1.wav", false);
 		sound1->setRepeat(true);
 		sound1->play();
 		GameOver(kills, tops, &exit);
