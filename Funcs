@@ -30,7 +30,7 @@ void enemyAttack(const int nmDamage, int* currentPlrHp, const int sleepTime, con
 	time_t start = time(NULL);
 	char press = getch();
 	time_t finish = time(NULL);
-	if (finish - start <= sleepTime / 1000 && press == dodgeButton)mj
+	if (finish - start <= sleepTime / 1000 && press == dodgeButton)
 		react = !react;
 	system("cls");
 	if (!react)
