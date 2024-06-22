@@ -27,8 +27,11 @@ void enemyAttack(const int nmDamage, int* currentPlrHp, const int sleepTime, con
 	cout << "                                                          " << *currentPlrHp << "/" << plrHp << "HP" << endl;
 	cout << "________________________________________________________________________________________________________________________";
 	cout << "________________________________________________________________________________________________________________________";
-	Sleep(sleepTime);
-	//вставить quick time event
+	time_t start = time(NULL);
+	char press = getch();
+	time_t finish = time(NULL);
+	if (finish - start <= sleepTime / 1000 && press == dodgeButton)mj
+		react = !react;
 	system("cls");
 	if (!react)
 	{
@@ -110,29 +113,47 @@ void playerAttack(const int plrDamage, const int critChance, const int critDamag
 		press = getch();
 	}
 	system("cls");
-	cout << "________________________________________________________________________________________________________________________";
-	cout << "________________________________________________________________________________________________________________________";
-	cout << "                                                          " << *currentNmHp << "/" << nmHp << "HP" << endl;
-	cout << "                                                          H H H H" << endl;
-	cout << "                                                          H H H H" << endl;
-	cout << "                                                          H H H H" << endl;
-	cout << "                                                          H H H H" << endl;
-	cout << "                                                           |" << endl;
-	cout << "                                                               |" << endl;
-	cout << "                                                          O O O O" << endl;
-	cout << "                                                          O O O O" << endl;
-	cout << "                                                          O O O O" << endl;
-	cout << "                                                          O O O O" << endl;
-	cout << "                                                           \n\n\n\n\n\n\n\n\n\n\n\n\n";
-	cout << "                                                          " << currentPlrHp << "/" << plrHp << "HP" << endl;
-	cout << "________________________________________________________________________________________________________________________";
-	cout << "________________________________________________________________________________________________________________________";
+
 	if (luck)
 	{
+		cout << "________________________________________________________________________________________________________________________";
+		cout << "________________________________________________________________________________________________________________________";
+		cout << "                                                          " << *currentNmHp << "/" << nmHp << "HP" << endl;
+		cout << "                                                          H H H H" << endl;
+		cout << "                                                          H H H H" << endl;
+		cout << "                                                          H H H H" << endl;
+		cout << "                                                          H H H H" << endl;
+		cout << "                                                           |          CRIT" << endl;
+		cout << "                                                               |" << endl;
+		cout << "                                                          O O O O" << endl;
+		cout << "                                                          O O O O" << endl;
+		cout << "                                                          O O O O" << endl;
+		cout << "                                                          O O O O" << endl;
+		cout << "                                                           \n\n\n\n\n\n\n\n\n\n\n\n\n";
+		cout << "                                                          " << currentPlrHp << "/" << plrHp << "HP" << endl;
+		cout << "________________________________________________________________________________________________________________________";
+		cout << "________________________________________________________________________________________________________________________";
 		*currentNmHp -= plrDamage + plrDamage * critDamage * 0.01;
 	}
 	else
 	{
+		cout << "________________________________________________________________________________________________________________________";
+		cout << "________________________________________________________________________________________________________________________";
+		cout << "                                                          " << *currentNmHp << "/" << nmHp << "HP" << endl;
+		cout << "                                                          H H H H" << endl;
+		cout << "                                                          H H H H" << endl;
+		cout << "                                                          H H H H" << endl;
+		cout << "                                                          H H H H" << endl;
+		cout << "                                                           |" << endl;
+		cout << "                                                               |" << endl;
+		cout << "                                                          O O O O" << endl;
+		cout << "                                                          O O O O" << endl;
+		cout << "                                                          O O O O" << endl;
+		cout << "                                                          O O O O" << endl;
+		cout << "                                                           \n\n\n\n\n\n\n\n\n\n\n\n\n";
+		cout << "                                                          " << currentPlrHp << "/" << plrHp << "HP" << endl;
+		cout << "________________________________________________________________________________________________________________________";
+		cout << "________________________________________________________________________________________________________________________";
 		*currentNmHp -= plrDamage;
 	}
 	Sleep(1000);
@@ -220,7 +241,7 @@ void reward(int* plrHp, int* plrDamage, int* critChance, int* critDamage, int* c
 	}
 	else if (choice == '3')
 	{
-		if (*currentPlrHp + *plrHp * 0.3 > *plrHp)
+		if (*currentPlrHp + *plrHp * 0.3 <= *plrHp)
 			*currentPlrHp += *plrHp * 0.3;
 		else
 			cout << "No";
@@ -241,7 +262,7 @@ void newEnemy(int* nmHp, int* nmDamage, int* sleepTime, int* currentNmHp)
 	cout << "";
 }
 
-void GameOver(const int kills, int* tops, int* exit)
+void GameOver(const int kills, int* tops, char* exit)
 {
 	for (int i = 0; i < 5; i++)
 	{
