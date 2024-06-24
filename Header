@@ -3,15 +3,17 @@
 #include <ctime>
 
 void enemyAttack(const int nmDamage, int* currentPlrHp, const int sleepTime, const char dodgeButton,
-	const int currentNmHp, const int nmHp, const int plrHp);
+	const int currentNmHp, const int nmHp, const int plrHp, const int* spellCharge);
 
-void playerAttack(const int plrDamage,const int critChance, const int critDamage, int* currentNmHp, 
-	const char attackButton, const int nmHp, const int plrHp, const int currentPlrHp);
+void playerAttack(const int plrDamage, const int critChance, const int critDamage, int* currentNmHp, 
+	const int nmHp, const int plrHp, const int currentPlrHp, const int* spellCharge);
 
-void reward(int* plrHp, int* plrDamage, int* critChance, int* critDamage, int* CurrentPlrHp);
+void spell(const int spellDamage, int* currentNmHp, const int nmHp, const int plrHp, const int currentPlrHp, int* spellCharge, int* chargeNum);
+
+void reward(int* plrHp, int* plrDamage, int* critChance, int* critDamage, int* CurrentPlrHp, int* spellDamage);
 
 void newEnemy(int* nmHp, int* nmDamage, int* sleepTime, int* currentNmHp);
 
-void GameOver(const int kills, int* tops, int* exit);
+void GameOver(const int kills, int* tops, char* exit);
 
-void mainMenu(float* volume, char* attackButton, char* dodgeButton);
+void mainMenu(float* volume, char* attackButton, char* dodgeButton, char* spellButton);
