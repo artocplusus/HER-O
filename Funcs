@@ -410,6 +410,8 @@ void mainMenu(float* volume, char* attackButton, char* dodgeButton, char* spellB
 			char press = getch();
 			if (press == '0')
 				*volume = 0.0f;
+			else
+				*volume = 1.0f;
 			cout << "                                                      SET ATTACK BUTTON\n\n";
 			*attackButton = getch();
 			cout << "                                                      SET DODGE BUTTON\n\n";
