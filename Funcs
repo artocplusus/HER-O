@@ -8,7 +8,7 @@
 using namespace std;
 
 void enemyAttack(const int nmDamage, int* currentPlrHp, const int sleepTime, const char dodgeButton, 
-	const int currentNmHp, const int nmHp, const int plrHp)
+	const int currentNmHp, const int nmHp, const int plrHp, const int* spellCharge)
 {
 	bool react = false;
 	cout << "________________________________________________________________________________________________________________________";
@@ -24,7 +24,7 @@ void enemyAttack(const int nmDamage, int* currentPlrHp, const int sleepTime, con
 	cout << "                                                          O O O O" << endl;
 	cout << "                                                          O O O O" << endl;
 	cout << "                                                          O O O O" << endl;
-	cout << "                                                          " << *currentPlrHp << "/" << plrHp << "HP" << endl;
+	cout << "SPELL CHARGE:" << spellCharge[0] << spellCharge[1] << spellCharge[2] << spellCharge[3] << "                                         " << *currentPlrHp << "/" << plrHp << "HP" << endl;
 	cout << "________________________________________________________________________________________________________________________";
 	cout << "________________________________________________________________________________________________________________________";
 	time_t start = time(NULL);
@@ -50,7 +50,7 @@ void enemyAttack(const int nmDamage, int* currentPlrHp, const int sleepTime, con
 		cout << "                                                          O O O O" << endl;
 		cout << "                                                          O O O O" << endl;
 		cout << "                                                          O O O O" << endl;
-		cout << "                                                          " << *currentPlrHp << "/" << plrHp << "HP" << endl;
+		cout << "SPELL CHARGE:" << spellCharge[0] << spellCharge[1] << spellCharge[2] << spellCharge[3] << "                                         " << *currentPlrHp << "/" << plrHp << "HP" << endl;
 		cout << "________________________________________________________________________________________________________________________";
 		cout << "________________________________________________________________________________________________________________________";
 	}
@@ -70,7 +70,7 @@ void enemyAttack(const int nmDamage, int* currentPlrHp, const int sleepTime, con
 		cout << "                                                                  O O O O" << endl;
 		cout << "                                                                  O O O O" << endl;
 		cout << "                                                                  O O O O" << endl;
-		cout << "                                                          " << *currentPlrHp << "/" << plrHp << "HP" << endl;
+		cout << "SPELL CHARGE:" << spellCharge[0] << spellCharge[1] << spellCharge[2] << spellCharge[3] << "                                         " << *currentPlrHp << "/" << plrHp << "HP" << endl;
 		cout << "________________________________________________________________________________________________________________________";
 		cout << "________________________________________________________________________________________________________________________";
 	}
@@ -89,15 +89,15 @@ void enemyAttack(const int nmDamage, int* currentPlrHp, const int sleepTime, con
 	cout << "                                                          O O O O" << endl;
 	cout << "                                                          O O O O" << endl;
 	cout << "                                                          O O O O" << endl;
-	cout << "                                                          " << *currentPlrHp << "/" << plrHp << "HP" << endl;
+	cout << "SPELL CHARGE:" << spellCharge[0] << spellCharge[1] << spellCharge[2] << spellCharge[3] << "                                         " << *currentPlrHp << "/" << plrHp << "HP" << endl;
 	cout << "________________________________________________________________________________________________________________________";
 	cout << "________________________________________________________________________________________________________________________";
 	Sleep(1000);
 }
 	
 
-void playerAttack(const int plrDamage, const int critChance, const int critDamage, int* currentNmHp,
-	const char attackButton, const int nmHp, const int plrHp, const int currentPlrHp)
+void playerAttack(const int plrDamage, const int critChance, const int critDamage, int* currentNmHp, const int nmHp,
+	const int plrHp, const int currentPlrHp, const int* spellCharge)
 {
 	srand(time(0));
 	int random;
@@ -106,11 +106,6 @@ void playerAttack(const int plrDamage, const int critChance, const int critDamag
 	if (random <= critChance)
 	{
 		luck = true;
-	}
-	char press = '~';
-	while (press != attackButton)
-	{
-		press = getch();
 	}
 	system("cls");
 
@@ -130,7 +125,7 @@ void playerAttack(const int plrDamage, const int critChance, const int critDamag
 		cout << "                                                          O O O O" << endl;
 		cout << "                                                          O O O O" << endl;
 		cout << "                                                           \n\n\n\n\n\n\n\n\n\n\n\n\n";
-		cout << "                                                          " << currentPlrHp << "/" << plrHp << "HP" << endl;
+		cout << "SPELL CHARGE:" << spellCharge[0] << spellCharge[1] << spellCharge[2] << spellCharge[3] << "                                         " << currentPlrHp << "/" << plrHp << "HP" << endl;
 		cout << "________________________________________________________________________________________________________________________";
 		cout << "________________________________________________________________________________________________________________________";
 		*currentNmHp -= plrDamage + plrDamage * critDamage * 0.01;
@@ -151,7 +146,7 @@ void playerAttack(const int plrDamage, const int critChance, const int critDamag
 		cout << "                                                          O O O O" << endl;
 		cout << "                                                          O O O O" << endl;
 		cout << "                                                           \n\n\n\n\n\n\n\n\n\n\n\n\n";
-		cout << "                                                          " << currentPlrHp << "/" << plrHp << "HP" << endl;
+		cout << "SPELL CHARGE:" << spellCharge[0] << spellCharge[1] << spellCharge[2] << spellCharge[3] << "                                         " << currentPlrHp << "/" << plrHp << "HP" << endl;
 		cout << "________________________________________________________________________________________________________________________";
 		cout << "________________________________________________________________________________________________________________________";
 		*currentNmHp -= plrDamage;
@@ -171,13 +166,94 @@ void playerAttack(const int plrDamage, const int critChance, const int critDamag
 	cout << "                                                          O O O O" << endl;
 	cout << "                                                          O O O O" << endl;
 	cout << "                                                          O O O O" << endl;
-	cout << "                                                          " << currentPlrHp << "/" << plrHp << "HP" << endl;
+	cout << "SPELL CHARGE:" << spellCharge[0] << spellCharge[1] << spellCharge[2] << spellCharge[3] << "                                         " << currentPlrHp << "/" << plrHp << "HP" << endl;
 	cout << "________________________________________________________________________________________________________________________";
 	cout << "________________________________________________________________________________________________________________________";
 	Sleep(1000);
 }
 
-void reward(int* plrHp, int* plrDamage, int* critChance, int* critDamage, int* currentPlrHp)
+void spell(const int spellDamage, int* currentNmHp, const int nmHp, const int plrHp, const int currentPlrHp, 
+	int* spellCharge, int* chargeNum)
+{
+	system("cls");
+	cout << "________________________________________________________________________________________________________________________";
+	cout << "________________________________________________________________________________________________________________________";
+	cout << "                                                          " << *currentNmHp << "/" << nmHp << "HP" << endl;
+	cout << "                                                          H H H H" << endl;
+	cout << "                                                          H H H H" << endl;
+	cout << "                                                          H H H H" << endl;
+	cout << "                                                          H H H H" << endl;
+	cout << "                                                           |\n\n\n\n\n\n\n\n\n                                                           ****\n                                                         ********\n                                                       ************\n                                                       ************\n                                                       ************\n";
+	cout << "                                                               |" << endl;
+	cout << "                                                          O O O O" << endl;
+	cout << "                                                          O O O O" << endl;
+	cout << "                                                          O O O O" << endl;
+	cout << "                                                          O O O O" << endl;
+	cout << "SPELL CHARGE:" << spellCharge[0] << spellCharge[1] << spellCharge[2] << spellCharge[3] << "                                         " << currentPlrHp << "/" << plrHp << "HP" << endl;
+	cout << "________________________________________________________________________________________________________________________";
+	cout << "________________________________________________________________________________________________________________________";
+	Sleep(100);
+	system("cls");
+	cout << "________________________________________________________________________________________________________________________";
+	cout << "________________________________________________________________________________________________________________________";
+	cout << "                                                          " << *currentNmHp << "/" << nmHp << "HP" << endl;
+	cout << "                                                          H H H H" << endl;
+	cout << "                                                          H H H H" << endl;
+	cout << "                                                          H H H H" << endl;
+	cout << "                                                          H H H H" << endl;
+	cout << "                                                           |\n\n\n\n\n\n                                                           ****\n                                                         ********\n                                                       ************\n                                                       ************\n                                                       ************\n                                                        **********\n                                                         ********\n                                                          ******\n";
+	cout << "                                                               |" << endl;
+	cout << "                                                          O O O O" << endl;
+	cout << "                                                          O O O O" << endl;
+	cout << "                                                          O O O O" << endl;
+	cout << "                                                          O O O O" << endl;
+	cout << "SPELL CHARGE:" << spellCharge[0] << spellCharge[1] << spellCharge[2] << spellCharge[3] << "                                         " << currentPlrHp << "/" << plrHp << "HP" << endl;
+	cout << "________________________________________________________________________________________________________________________";
+	cout << "________________________________________________________________________________________________________________________";
+	Sleep(100);
+	system("cls");
+	cout << "________________________________________________________________________________________________________________________";
+	cout << "________________________________________________________________________________________________________________________";
+	cout << "                                                          " << *currentNmHp << "/" << nmHp << "HP" << endl;
+	cout << "                                                          H H H H" << endl;
+	cout << "                                                          H H H H" << endl;
+	cout << "                                                          H H H H" << endl;
+	cout << "                                                          H H H H" << endl;
+	cout << "                                                           |\n\n                                                           ****\n                                                         ********\n                                                       ************\n                                                       ************\n                                                       ************\n                                                        **********\n                                                         ********\n                                                          ******\n                                                           ****\n                                                            **\n                                                            **\n\n";
+	cout << "                                                               |" << endl;
+	cout << "                                                          O O O O" << endl;
+	cout << "                                                          O O O O" << endl;
+	cout << "                                                          O O O O" << endl;
+	cout << "                                                          O O O O" << endl;
+	cout << "SPELL CHARGE:" << spellCharge[0] << spellCharge[1] << spellCharge[2] << spellCharge[3] << "                                         " << currentPlrHp << "/" << plrHp << "HP" << endl;
+	cout << "________________________________________________________________________________________________________________________";
+	cout << "________________________________________________________________________________________________________________________";
+	*currentNmHp -= spellDamage;
+	for (int i = 0; i < 4; i++)
+		spellCharge[i] = 0;
+	*chargeNum = 0;
+	Sleep(300);
+	system("cls");
+	cout << "________________________________________________________________________________________________________________________";
+	cout << "________________________________________________________________________________________________________________________";
+	cout << "                                                          " << *currentNmHp << "/" << nmHp << "HP" << endl;
+	cout << "                                                          H H H H" << endl;
+	cout << "                                                          H H H H" << endl;
+	cout << "                                                          H H H H" << endl;
+	cout << "                                                          H H H H" << endl;
+	cout << "                                                           |\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
+	cout << "                                                               |" << endl;
+	cout << "                                                          O O O O" << endl;
+	cout << "                                                          O O O O" << endl;
+	cout << "                                                          O O O O" << endl;
+	cout << "                                                          O O O O" << endl;
+	cout << "SPELL CHARGE:" << spellCharge[0] << spellCharge[1] << spellCharge[2] << spellCharge[3] << "                                         " << currentPlrHp << "/" << plrHp << "HP" << endl;
+	cout << "________________________________________________________________________________________________________________________";
+	cout << "________________________________________________________________________________________________________________________";
+	Sleep(1000);
+}
+
+void reward(int* plrHp, int* plrDamage, int* critChance, int* critDamage, int* currentPlrHp, int* spellDamage)
 {
 	srand(time(0));
 
@@ -185,80 +261,84 @@ void reward(int* plrHp, int* plrDamage, int* critChance, int* critDamage, int* c
 	int random1;
 	cout << "Current HP = " << *currentPlrHp << endl << "Max HP = " << *plrHp << endl << "Damage = " <<
 		*plrDamage << endl << "Crit chance = " << *critChance << "%" << endl << "Crit damage = " <<
-		*critDamage << "%" << endl << endl;
+		*critDamage << "%" << endl << "Spell damage = " << *spellDamage << endl <<endl;
 	for (int i = 0; i < 2; i++)
 	{
-		random2 = rand() % 4;
+		random2 = rand() % 5;
 		if (i == 0)
 			random1 = random2;
 		if (random2 == 0)
-			cout << i + 1 << " - crit chance + 5% (<=70%)" << endl;
+			cout << i + 1 << " - crit chance + 10% (<=70%)" << endl;
 		else if (random2 == 1)
-			cout << i + 1 << " - crit Damage + 10%" << endl;
+			cout << i + 1 << " - crit Damage + 50%" << endl;
 		else if (random2 == 2)
 			cout << i + 1 << " - Damage + 5" << endl;
 		else if (random2 == 3)
-			cout << i + 1 << " - Max HP + 10" << endl;
+			cout << i + 1 << " - Max HP + 15" << endl;
+		else if (random2 == 4)
+			cout << i + 1 << " - Spell damage + 25" << endl;
 	}
 
-	cout << "3 - Heal 30% HP" << endl;
+	cout << "3 - Heal 100% HP" << endl;
 	char choice = getch();
 
 	if (choice == '1')
 	{
 		if (random1 == 0)
 		{
-			if (*critChance <= 70)
-				*critChance += 5;
+			if (*critChance < 70)
+				*critChance += 10;
 			else
 				cout << endl << "No" << endl;
 		}
 		else if (random1 == 1)
-			*critDamage += 10;
+			*critDamage += 50;
 		else if (random1 == 2)
 			*plrDamage += 5;
 		else if (random1 == 3)
 		{
-			*plrHp += 10;
-			*currentPlrHp += 10;
+			*plrHp += 15;
+			*currentPlrHp += 15;
 		}
+		else if (random1 == 4)
+			*spellDamage += 25;
 	}
 	else if (choice == '2')
 	{
 		if (random2 == 0)
 		{
-			if (*critChance <= 70)
-				*critChance += 5;
+			if (*critChance < 70)
+				*critChance += 10;
 			else
 				cout << endl << "No" << endl;
 		}
 		else if (random2 == 1)
-			*critDamage += 10;
+			*critDamage += 50;
 		else if (random2 == 2)
 			*plrDamage += 5;
 		else if (random2 == 3)
-			*plrHp += 10;
+		{
+			*plrHp += 15;
+			*currentPlrHp += 15;
+		}
+		else if (random2 == 4)
+			*spellDamage += 25;
 	}
 	else if (choice == '3')
-	{
-		if (*currentPlrHp + *plrHp * 0.3 <= *plrHp)
-			*currentPlrHp += *plrHp * 0.3;
-		else
-			cout << "No";
-	}
-	Sleep(1500);
+		*currentPlrHp = *plrHp;
+	Sleep(1000);
 	system("cls");
 }
 
 void newEnemy(int* nmHp, int* nmDamage, int* sleepTime, int* currentNmHp)
 {
 	*nmHp += 5;
-	*nmDamage += 2;
-	if (*sleepTime >= 100)
+	*nmDamage += 1;
+	if (*sleepTime >= 200)
 	{
-		*sleepTime -= 25;
+		*sleepTime -= 15;
 	}
-	*currentNmHp = *nmHp;
+	*currentNmHp = *nmHp; 
 	cout << "";
 }
 
@@ -280,11 +360,33 @@ void GameOver(const int kills, int* tops, char* exit)
 			}
 		}
 	}
-	cout << "";
+	cout << "                       ______________              ____              ____         ____      ___________ " << endl;
+	cout << "                      |              |            /    \\            |    \\       /    |    |   ________|" << endl;;
+	cout << "                      |    __________|           /      \\           |     \\     /     |    |  |         " << endl;;
+	cout << "                      |   |                     /   /\\   \\          |      \\   /      |    |  |         " << endl;;
+	cout << "                      |   |__________          /   /  \\   \\         |   |\\  \\ /  /|   |    |  |_______  " << endl;;
+	cout << "                      |    _______   |        /   /    \\   \\        |   | \\     / |   |    |   _______| " << endl;;
+	cout << "                      |   |       |  |       /   /______\\   \\       |   |  \\___/  |   |    |  |         " << endl;;
+	cout << "                      |   |       |  |      /   /        \\   \\      |   |         |   |    |  |         " << endl;;
+	cout << "                      |   |_______|  |     /   /          \\   \\     |   |         |   |    |  |________ " << endl;;
+	cout << "                      |______________|    /___/            \\___\\    |___|         |___|    |___________|" << endl;;
+	cout << "                            ___________     ___              ___    ____________     ___________     " << endl;
+	cout << "                           |   _____   |    \\  \\            /  /   |   _________|   |   _____   |    " << endl;
+	cout << "                           |  |     |  |     \\  \\          /  /    |  |             |  |     |  |    " << endl;
+	cout << "                           |  |     |  |      \\  \\        /  /     |  |             |  |     |  |    " << endl;
+	cout << "                           |  |     |  |       \\  \\      /  /      |  |_______      |  |   __|__|    " << endl;
+	cout << "                           |  |     |  |        \\  \\    /  /       |   _______|     |  |  \\  \\     " << endl;
+	cout << "                           |  |     |  |         \\  \\  /  /        |  |             |  |   \\  \\    " << endl;
+	cout << "                           |  |     |  |          \\  \\/  /         |  |             |  |    \\  \\   " << endl;
+	cout << "                           |  |_____|  |           \\    /          |  |_________    |  |     \\  \\  " << endl;
+	cout << "                           |___________|            \\__/           |____________|   |__|      \\__\\ " << endl << endl << endl;
+	cout << "                                                  PRESS ANY KEY TO EXIT                                                \n                                                   PRESS 1 TO RESTART" << endl;
+	cout << "                                                      YOUR KILLS: " << kills << endl << "                                                         1 - " << tops[4] << endl << "                                                         2 - " << tops[3] << endl << "                                                         3 - " << tops[2] << endl << "                                                         4 - " << tops[1] << endl << "                                                         5 - " << tops[0];
 	*exit = getch();
+	system("cls");
 }
 
-void mainMenu(float* volume, char* attackButton, char* dodgeButton)
+void mainMenu(float* volume, char* attackButton, char* dodgeButton, char* spellButton)
 {
 	char choice = 's';
 	while (choice == 's')
@@ -304,14 +406,18 @@ void mainMenu(float* volume, char* attackButton, char* dodgeButton)
 		if (choice == 's')
 		{
 			system("cls");
-			cout << "\n\n\n\n\n\nMUTE MUSIC?\n0 - YES\n1 - NO\n\n";
+			cout << "\n\n\n\n\n\n                                                      MUTE MUSIC?\n                                                      0 - YES\n                                                      1 - NO\n\n";
 			char press = getch();
 			if (press == '0')
 				*volume = 0.0f;
-			cout << "SET ATTACK BUTTON\n\n";
+			cout << "                                                      SET ATTACK BUTTON\n\n";
 			*attackButton = getch();
-			cout << "SET DODGE BUTTON\n\n";
+			cout << "                                                      SET DODGE BUTTON\n\n";
 			*dodgeButton = getch();
+			cout << "                                                      SET SPELL BUTTON\n\n";
+			*spellButton = getch();
+			cout << "                                                      HOW TO PLAY?\n                                            When !  appears  on  the  screen,\n                                            Press  the  " << *dodgeButton << "  button  to  dodge.\n                                            If  you  don't  make  it in time,\n                                            You   will   take  damage.  After\n                                            Enemy's hit,   you   can  hit  by\n                                            Pressing  " << *attackButton << "  button.  If  your HP\n                                            Drops  to zero,  you  will  lose,\n                                            If  enemy's  HP  drops  to  zero,\n                                            An upgrade will appear to choose.";
+			getch();
 			system("cls");
 		}
 	}
