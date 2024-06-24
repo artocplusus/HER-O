@@ -1,3 +1,8 @@
+#include <iostream>
+#include <ctime>
+#include "Header.h"
+#include <conio.h>
+#include "audiere.h"
 #include "windows.h"
 #include <stdlib.h>
 #pragma warning(disable : 4996)
@@ -60,6 +65,7 @@ int main()
 		system("cls");
 		sound1->stop();
 		sound1 = OpenSound(device, "6717309660561408.wav", false);
+		sound1->setVolume(volume);
 		newEnemy(&nmHp, &nmDamage, &sleepTime, &currentNmHp);
 		sound->setRepeat(true);
 		sound->play();
@@ -107,12 +113,14 @@ int main()
 					kills++;
 					sound->stop();
 					sound = OpenSound(device, "My_New_Song_1_1.wav", false);
+					sound->setVolume(volume);
 					sound1->setRepeat(true);
 					sound1->play();
 					system("cls");
 					reward(&plrHp, &plrDamage, &critChance, &critDamage, &currentPlrHp, &spellDamage);
 					sound1->stop();
 					sound1 = OpenSound(device, "6717309660561408.wav", false);
+					sound1->setVolume(volume);
 					newEnemy(&nmHp, &nmDamage, &sleepTime, &currentNmHp);
 					cout << "________________________________________________________________________________________________________________________";
 					cout << "________________________________________________________________________________________________________________________";
