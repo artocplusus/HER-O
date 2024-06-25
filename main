@@ -50,7 +50,7 @@ int main()
 		plrDamage = 5;
 		spellDamage = 25;
 		plrHp = 20;
-		currentPlrHp = 5;
+		currentPlrHp = 20;
 		critChance = 0;
 		critDamage = 50;
 		chargeNum = 0;
