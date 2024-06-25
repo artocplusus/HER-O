@@ -103,7 +103,7 @@ void playerAttack(const int plrDamage, const int critChance, const int critDamag
 	int random;
 	bool luck = false;
 	random = rand() % 100;
-	if (random <= critChance)
+	if (random < critChance)
 	{
 		luck = true;
 	}
